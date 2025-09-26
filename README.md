@@ -258,7 +258,7 @@ def format_programs(channel_name, programs, category, date_str):
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     date_display = date_obj.strftime("%d/%m/%y")
     formatted_channel_name = format_channel_name(channel_name)
-    current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Adiciona uma quebra extra após o nome
+    current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Adiciona o link abaixo do nome com quebra de linha
     program_count = 0
     
     for program in programs:
@@ -267,7 +267,7 @@ def format_programs(channel_name, programs, category, date_str):
         
         if program_count >= 10:
             messages.append(current_message)
-            current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Reinicia com a quebra extra
+            current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Reinicia com o link abaixo do nome com quebra de linha
             program_count = 0
     
     if program_count > 0:
