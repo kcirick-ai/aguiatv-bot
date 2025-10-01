@@ -279,11 +279,23 @@ def format_programs(channel_name, programs, category, date_str):
 # Função para enviar a CTA
 async def send_cta(context: ContextTypes.DEFAULT_TYPE, chat_id: int, topic_id: int, category: str):
     cta_message = (
-        "🎬 Quer mais canais ao vivo, filmes e séries em HD/4K por apenas R$ 35,00/mês?\n"
-        "🎁 Peça agora seu teste grátis de 6 horas com todo o conteúdo!\n"
-        "📲 Fale comigo no WhatsApp: (82) 99659-6471 (Diga que veio do grupo!) 🚀\n"
-        "💥 Não perca essa chance! Assine hoje e transforme sua TV!\n"
-        "\nw.app/AssistaTodosOsCanaisAqui"
+        "📺 IPTV PREMIUM COM TESTE GRÁTIS 📺\n\n"
+        "🔥 Chegou a hora de transformar sua TV! Assista a mais de 20.000 canais ao vivo e 60.000 filmes e séries em qualidade HD, Full HD e 4K! Tudo isso por apenas R$ 35,00/mês! 💸\n\n"
+        "🎁 Teste GRÁTIS por 6 horas com TODO o conteúdo liberado:\n"
+        "- 📡 Canais nacionais e internacionais\n"
+        "- ⚽️ Esportes ao vivo (incluindo PPV)\n"
+        "- 🎬 Filmes e séries atualizados\n"
+        "- 🧸 Conteúdo infantil\n"
+        "- 📱 Reelshorts dublados\n"
+        "- 🐉 Animes\n"
+        "- 🍿 Doramas e muito mais!\n\n"
+        "✅ Sem travamentos – Servidores estáveis com tecnologia anti-freeze!\n"
+        "✅ Compatível com todos os dispositivos: Smart TVs, TvBox, FireStick, Android, iOS, PC e mais.\n"
+        "✅ Suporte 24/7 via WhatsApp comigo (Ricardo).\n"
+        "✅ Ganhe 1 mês grátis por indicação ativa!\n\n"
+        "📲 Quer testar agora? Fale comigo no WhatsApp:\n"
+        "👉 w.app/AssistaTodosOsCanaisAqui\n\n"
+        "💥 Não perca essa chance! Assine já e tenha o melhor da TV na palma da sua mão. 🎉"
     )
     retries = 3
     for attempt in range(retries):
