@@ -258,7 +258,7 @@ def format_programs(channel_name, programs, category, date_str):
     date_obj = datetime.strptime(date_str, "%Y-%m-%d")
     date_display = date_obj.strftime("%d/%m/%y")
     formatted_channel_name = format_channel_name(channel_name)
-    current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Adiciona o link abaixo do nome com quebra de linha
+    current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nbit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries\n\n"  # Substitui o link abaixo do nome com quebra de linha
     program_count = 0
     
     for program in programs:
@@ -267,7 +267,7 @@ def format_programs(channel_name, programs, category, date_str):
         
         if program_count >= 10:
             messages.append(current_message)
-            current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nw.app/AssistaTodosOsCanaisAqui\n\n"  # Reinicia com o link abaixo do nome com quebra de linha
+            current_message = f"✅ #{formatted_channel_name} ({date_display})\n\nbit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries\n\n"  # Reinicia com o novo link abaixo do nome com quebra de linha
             program_count = 0
     
     if program_count > 0:
@@ -294,7 +294,7 @@ async def send_cta(context: ContextTypes.DEFAULT_TYPE, chat_id: int, topic_id: i
         "✅ Suporte 24/7 via WhatsApp comigo (Ricardo).\n"
         "✅ Ganhe 1 mês grátis por indicação ativa!\n\n"
         "📲 Quer testar agora? Fale comigo no WhatsApp:\n"
-        "👉 w.app/AssistaTodosOsCanaisAqui\n\n"
+        "👉 bit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries\n\n"
         "💥 Não perca essa chance! Assine já e tenha o melhor da TV na palma da sua mão. 🎉"
     )
     retries = 3
@@ -346,7 +346,7 @@ async def schedule_daily_extraction(context: ContextTypes.DEFAULT_TYPE):
                     emoji = CATEGORIES[category]["emoji"]
                     day_week = get_day_of_week(date_obj)
                     date_formatted = date_obj.strftime("%d/%m/%Y")
-                    header = f"{emoji} PROGRAMAÇÃO DE {category.upper()}\n📅 {day_week}, {date_formatted}\nw.app/AssistaTodosOsCanaisAqui"
+                    header = f"{emoji} PROGRAMAÇÃO DE {category.upper()}\n📅 {day_week}, {date_formatted}\nbit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries"
                     topic_id = CATEGORIES[category]["topic_id"]
                     retries = 3
                     for attempt in range(retries):
@@ -470,7 +470,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         logging.warning(f"Usuário não autorizado: {update.effective_user.id}")
         return
     
-    keyboard = [[InlineKeyboardButton("Escolher Date", callback_data="choose_date")]]
+    keyboard = [[InlineKeyboardButton("Escolher Data", callback_data="choose_date")]]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text("Bem-vindo! Escolha uma data para as programações.", reply_markup=reply_markup)
     logging.info("Mensagem de boas-vindas enviada.")
@@ -502,9 +502,9 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 date_buttons = []
         if date_buttons:  # Adicionar botões restantes
             keyboard.append(date_buttons)
-        keyboard.append([InlineKeyboardButton("Voltar", callback_data="start")])
+        keyboard.append([InlineKeyboardButton("Voltar ao Início", callback_data="start")])
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await query.message.edit_text("Selecione o dia (disponível até 14 dias).", reply_markup=reply_markup)
+        await query.edit_message_text("Selecione o dia (disponível até 14 dias).", reply_markup=reply_markup)
         logging.info("Menu de datas exibido.")
     
     elif data.startswith("date_"):
@@ -522,10 +522,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if category_buttons:  # Adicionar botões restantes
             keyboard.append(category_buttons)
         keyboard.append([InlineKeyboardButton("Todas as Categorias", callback_data="category_all")])
-        keyboard.append([InlineKeyboardButton("Voltar", callback_data="choose_date")])
+        keyboard.append([InlineKeyboardButton("Voltar ao Início", callback_data="start")])
         reply_markup = InlineKeyboardMarkup(keyboard)
         date_display = datetime.strptime(date_str, "%Y-%m-%d").strftime("%d/%m/%Y")
-        await query.message.edit_text(f"Escolha uma categoria ou todas para {date_display}.", reply_markup=reply_markup)
+        await query.edit_message_text(f"Escolha uma categoria ou todas para {date_display}.", reply_markup=reply_markup)
         logging.info("Menu de categorias exibido.")
     
     elif data.startswith("category_"):
@@ -535,21 +535,21 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if category == "all":
             keyboard = [
                 [InlineKeyboardButton("Iniciar Extração", callback_data="start_extraction")],
-                [InlineKeyboardButton("Voltar", callback_data="choose_date")]
+                [InlineKeyboardButton("Voltar ao Início", callback_data="start")]
             ]
             reply_markup = InlineKeyboardMarkup(keyboard)
             date_display = datetime.strptime(EXTRACTION_STATE["selected_date"], "%Y-%m-%d").strftime("%d/%m/%Y")
-            await query.message.edit_text(f"Iniciar extração para Todas as Categorias - {date_display}?", reply_markup=reply_markup)
+            await query.edit_message_text(f"Iniciar extração para Todas as Categorias - {date_display}?", reply_markup=reply_markup)
             logging.info("Confirmação para todas as categorias exibida.")
         else:
             keyboard = [[InlineKeyboardButton(channel["name"], callback_data=f"channel_{channel['name']}") for channel in CHANNELS[category][:3]]]
             for i in range(3, len(CHANNELS[category]), 3):
                 keyboard.append([InlineKeyboardButton(channel["name"], callback_data=f"channel_{channel['name']}") for channel in CHANNELS[category][i:i+3]])
             keyboard.append([InlineKeyboardButton("Todos os Canais", callback_data="channel_all")])
-            keyboard.append([InlineKeyboardButton("Voltar", callback_data=f"date_{EXTRACTION_STATE['selected_date']}")])
+            keyboard.append([InlineKeyboardButton("Voltar ao Início", callback_data="start")])
             reply_markup = InlineKeyboardMarkup(keyboard)
             date_display = datetime.strptime(EXTRACTION_STATE["selected_date"], "%Y-%m-%d").strftime("%d/%m/%Y")
-            await query.message.edit_text(f"Selecione o canal para {category}, {date_display}.", reply_markup=reply_markup)
+            await query.edit_message_text(f"Selecione o canal para {category}, {date_display}.", reply_markup=reply_markup)
             logging.info("Menu de canais exibido.")
     
     elif data.startswith("channel_"):
@@ -563,15 +563,15 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
             target = "Todas as Categorias"
         keyboard = [
             [InlineKeyboardButton("Iniciar Extração", callback_data="start_extraction")],
-            [InlineKeyboardButton("Voltar", callback_data=f"category_{EXTRACTION_STATE['selected_category'] or 'all'}")]
+            [InlineKeyboardButton("Voltar ao Início", callback_data="start")]
         ]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await query.message.edit_text(f"Iniciar extração para {target} - {date_display}?", reply_markup=reply_markup)
+        await query.edit_message_text(f"Iniciar extração para {target} - {date_display}?", reply_markup=reply_markup)
         logging.info("Confirmação de extração exibida.")
     
     elif data == "start_extraction":
         if EXTRACTION_STATE["running"]:
-            await query.message.edit_text("Extração já em andamento. Use 'Parar Extração' para interromper.")
+            await query.edit_message_text("Extração já em andamento. Use 'Parar Extração' para interromper.")
             logging.info("Extração já em andamento, comando ignorado.")
             return
         
@@ -581,7 +581,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                  f"{EXTRACTION_STATE['selected_category']} - {EXTRACTION_STATE['selected_channel'] or 'Todos os Canais'}"
         keyboard = [[InlineKeyboardButton("Parar Extração", callback_data="stop_extraction")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await query.message.edit_text(f"📢 Extraindo programações para {target} - {date_display}...", reply_markup=reply_markup)
+        await query.edit_message_text(f"📢 Extraindo programações para {target} - {date_display}...", reply_markup=reply_markup)
         logging.info(f"Iniciando extração para {target} - {date_display}")
         
         # Verificar se a data é futura e avisar o usuário
@@ -606,7 +606,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
                 emoji = CATEGORIES[category]["emoji"]
                 day_week = get_day_of_week(date_obj)
                 date_formatted = date_obj.strftime("%d/%m/%Y")
-                header = f"{emoji} PROGRAMAÇÃO DE {category.upper()}\n📅 {day_week}, {date_formatted}\nw.app/AssistaTodosOsCanaisAqui"
+                header = f"{emoji} PROGRAMAÇÃO DE {category.upper()}\n📅 {day_week}, {date_formatted}\nbit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries"
                 topic_id = CATEGORIES[category]["topic_id"]
                 retries = 3
                 for attempt in range(retries):
@@ -719,7 +719,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         if EXTRACTION_STATE["running"]:
             keyboard = [[InlineKeyboardButton("Voltar ao Início", callback_data="start")]]
             reply_markup = InlineKeyboardMarkup(keyboard)
-            await query.message.edit_text("✅ Extração concluída! Programações enviadas.", reply_markup=reply_markup)
+            await query.edit_message_text("✅ Extração concluída! Programações enviadas.", reply_markup=reply_markup)
             logging.info("Extração concluída com sucesso.")
         EXTRACTION_STATE["running"] = False
         EXTRACTION_STATE["header_sent"].clear()  # Limpa o estado dos headers
@@ -728,13 +728,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         EXTRACTION_STATE["running"] = False
         keyboard = [[InlineKeyboardButton("Voltar ao Início", callback_data="start")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await query.message.edit_text("⛔ Extração interrompida.", reply_markup=reply_markup)
+        await query.edit_message_text("⛔ Extração interrompida.", reply_markup=reply_markup)
         logging.info("Extração interrompida pelo usuário.")
     
     elif data == "start":
-        keyboard = [[InlineKeyboardButton("Escolher Date", callback_data="choose_date")]]
+        keyboard = [[InlineKeyboardButton("Escolher Data", callback_data="choose_date")]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        await update.message.reply_text("Bem-vindo! Escolha uma data para as programações.", reply_markup=reply_markup)
+        await query.edit_message_text("Bem-vindo! Escolha uma data para as programações.", reply_markup=reply_markup)
         logging.info("Mensagem de boas-vindas enviada.")
 
 def main():
