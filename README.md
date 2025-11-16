@@ -26,7 +26,7 @@ GROUP_ID = -1002326740811
 # CONFIGURAÇÕES DE EXTRAÇÃO DIÁRIA AUTOMÁTICA (EDITÁVEIS)
 # ==============================================================================
 # HORA (0-23) para a extração automática diária (ex: 18 para 18:00)
-DAILY_EXTRACTION_HOUR = 18
+DAILY_EXTRACTION_HOUR = 19
 # MINUTO (0-59) para a extração automática diária (ex: 0 para 18:00)
 DAILY_EXTRACTION_MINUTE = 0
 # Texto explicativo para a extração diária (opcional, apenas para referência)
