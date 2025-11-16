@@ -38,23 +38,7 @@ DAILY_EXTRACTION_EXPLANATION = "A extração diária será executada automaticam
 # Texto completo da Chamada para Ação (CTA) que será enviada após cada categoria (EDITÁVEL)
 # Se esta variável for deixada vazia (ex: CTA_MESSAGE = ""), a CTA não será enviada.
 CTA_MESSAGE = (
-    "📺 IPTV PREMIUM COM TESTE GRÁTIS 📺\n\n"
-    "🔥 Chegou a hora de transformar sua TV! Assista a mais de 20.000 canais ao vivo e 60.000 filmes e séries em qualidade HD, Full HD e 4K! Tudo isso por apenas R$ 35,00/mês! 💸\n\n"
-    "🎁 Teste GRÁTIS por 6 horas com TODO o conteúdo liberado:\n"
-    "- 📡 Canais nacionais e internacionais\n"
-    "- ⚽️ Esportes ao vivo (incluindo PPV)\n"
-    "- 🎬 Filmes e séries atualizados\n"
-    "- 🧸 Conteúdo infantil\n"
-    "- 📱 Reelshorts dublados\n"
-    "- 🐉 Animes\n"
-    "- 🍿 Doramas e muito mais!\n\n"
-    "✅ Sem travamentos – Servidores estáveis com tecnologia anti-freeze!\n"
-    "✅ Compatível com todos os dispositivos: Smart TVs, TvBox, FireStick, Android, iOS, PC e mais.\n"
-    "✅ Suporte 24/7 via WhatsApp comigo (Ricardo).\n"
-    "✅ Ganhe 1 mês grátis por indicação ativa!\n\n"
-    "📲 Quer testar agora? Fale comigo no WhatsApp:\n"
-    "👉 bit.ly/CliqueParaConhecerGratisNossoAppDeCanaisFilmesSeries\n\n"
-    "💥 Não perca essa chance! Assine já e tenha o melhor da TV na palma da sua mão. 🎉"
+""
 )
 # Texto explicativo para a CTA (opcional, apenas para referência)
 CTA_EXPLANATION = "Este é o texto de marketing que será postado no final de cada categoria de programação."
